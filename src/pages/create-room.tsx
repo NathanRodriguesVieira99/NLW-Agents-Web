@@ -1,41 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
-import { useCallback } from "react";
-import { Link } from "react-router-dom";
-import { api } from "@/lib/axios";
-
-type GetRoomsAPIResponse = Array<{
-  id: string;
-  name: string;
-}>;
+import { CreateRoomForm } from "@/components/create-room-form";
+import { Roomlist } from "@/components/room-list";
 
 export const CreateRoom = () => {
-  const fetchRooms = useCallback(async () => {
-    try {
-      const res = await api.get<GetRoomsAPIResponse>("rooms");
-      return res.data;
-    } catch {
-      throw new Error("Erro a buscar salas");
-    }
-  }, []);
-
-  const { data, isLoading } = useQuery({
-    queryKey: ["get-rooms"],
-    queryFn: fetchRooms,
-  });
-
   return (
-    <div>
-      <div> Create Room</div>
-
-      {isLoading && <p>Carregando...</p>}
-      <div className="flex flex-col gap-1">
-        {data?.map((room) => {
-          return (
-            <Link key={room.id} to={`/room/${room.id}`}>
-              {room.name}
-            </Link>
-          );
-        })}
+    <div className="min-h-screen px-4 py-8">
+      <div className="mx-auto max-w-4xl ">
+        <div className="grid grid-cols-2 items-start gap-8 ">
+          <CreateRoomForm />
+          <Roomlist />
+        </div>
       </div>
     </div>
   );
