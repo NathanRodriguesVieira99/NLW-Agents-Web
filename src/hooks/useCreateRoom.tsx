@@ -9,7 +9,7 @@ export const useCreateRoom = () => {
   const createRoom = async (
     data: CreateRoomRequest
   ): Promise<CreateRoomResponse> => {
-    const res = await api.post("/rooms", data);
+    const res = await api.post("rooms", data);
 
     return res.data;
   };
