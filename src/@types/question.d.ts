@@ -3,6 +3,7 @@ interface Question {
   question: string;
   answer?: string | null;
   createdAt: string;
+  isGeneratingAnswer?: boolean;
 }
 
 export interface QuestionItemProps {
